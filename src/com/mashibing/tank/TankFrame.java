@@ -40,7 +40,7 @@ public class TankFrame extends Frame {
 
         // 这样不断隐藏frame，点出frame，就会发现方块移动了
         x += 10;
-        y += 10;
+        // y += 10;
     }
 
 
