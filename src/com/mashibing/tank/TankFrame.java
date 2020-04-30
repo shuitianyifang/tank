@@ -11,6 +11,12 @@ public class TankFrame extends Frame {
 
     int x = 200, y = 200;
 
+    // 设置默认方向为向下
+    Dir dir = Dir.DOWN;
+
+    // 设置坦克默认速度
+    private static final int SPEED = 10;
+
     // 构造方法中初始化一些属性
     public TankFrame(){
         setSize(800,600);
@@ -37,6 +43,23 @@ public class TankFrame extends Frame {
     @Override
     public void paint(Graphics g){
         g.fillRect(x,y,50,50);
+
+        // 根据坦克的方向进行坦克的移动
+        // 这里定义每次“画图”的长度 （每次为10）
+        switch (dir){
+            case LEFT:
+                x -= SPEED;
+                break;
+            case UP:
+                y -= SPEED;
+                break;
+            case RIGHT:
+                x += SPEED;
+                break;
+            case DOWN:
+                y += SPEED;
+                break;
+        }
 
         // 这样不断隐藏frame，点出frame，就会发现方块移动了
         // x += 10;
@@ -77,6 +100,8 @@ public class TankFrame extends Frame {
                 default:
                     break;
             }
+
+            setMainTankDir();
         }
 
         // 这个方法是在一个键弹起的时候调用
@@ -101,7 +126,18 @@ public class TankFrame extends Frame {
                 default:
                     break;
             }
+
+            setMainTankDir();
         }
+
+        // 这个方法用于改变坦克行进的方向
+        private void setMainTankDir(){
+            if(bL) dir = Dir.LEFT;
+            if(bU) dir = Dir.UP;
+            if(bR) dir = Dir.RIGHT;
+            if(bD) dir = Dir.DOWN;
+        }
+
     }
 
 }
