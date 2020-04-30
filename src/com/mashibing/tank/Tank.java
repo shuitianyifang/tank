@@ -12,7 +12,7 @@ public class Tank {
     // 设置默认方向为向下
     private Dir dir = Dir.DOWN;
     // 设置坦克默认速度
-    private static final int SPEED = 10;
+    private static final int SPEED = 5;
 
     // 设置坦克是否移动, true=移动，false=不动
     private boolean moving = false;
@@ -53,6 +53,7 @@ public class Tank {
     }
 
     private void move(){
+
         if(!moving) return;
 
         // 根据坦克的方向进行坦克的移动

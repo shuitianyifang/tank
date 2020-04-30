@@ -11,6 +11,8 @@ public class TankFrame extends Frame {
 
     // new出我们需要的坦克
     Tank myTank = new Tank(200,200, Dir.DOWN);
+    // new出子弹
+    Bullet bullet = new Bullet(300,300, Dir.DOWN);
 
     // 构造方法中初始化一些属性
     public TankFrame(){
@@ -41,6 +43,9 @@ public class TankFrame extends Frame {
         // 将画笔直接传给目标坦克，让这个坦克自己画出自己
         // （这样就不用去拉取属性，因为拆开封装好的属性是错误的）
         myTank.paint(g);
+
+        // 同理，画出子弹
+        bullet.paint(g);
 
         // 这样不断隐藏frame，点出frame，就会发现方块移动了
         // x += 10;
