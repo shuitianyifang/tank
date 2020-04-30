@@ -8,14 +8,14 @@ import java.awt.*;
 public class Tank {
 
     // 初始位置
-    private int x = 200, y = 200;
+    private int x,y;
     // 设置默认方向为向下
     private Dir dir = Dir.DOWN;
-    // 设置坦克默认速度
-    private static final int SPEED = 5;
     // new 坦克时，将哪个窗口需要用到坦克，那个窗口传入
     private TankFrame tf = null;
 
+    // 设置坦克默认速度
+    private static final int SPEED = 5;
     // 设置坦克是否移动, true=移动，false=不动
     private boolean moving = false;
 
@@ -83,7 +83,7 @@ public class Tank {
     }
 
     public void fire() {
-        tf.bullet = new Bullet(this.x, this.y, this.dir);
+        tf.bullets.add( new Bullet(this.x, this.y, this.dir, this.tf) );
     }
 
 }

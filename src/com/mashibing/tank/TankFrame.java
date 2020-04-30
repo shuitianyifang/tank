@@ -5,6 +5,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 // 继承Frame类
 public class TankFrame extends Frame {
@@ -14,7 +16,9 @@ public class TankFrame extends Frame {
     // new出我们需要的坦克
     Tank myTank = new Tank(200,200, Dir.DOWN,this);
     // new出子弹
-    Bullet bullet = new Bullet(300,300, Dir.DOWN);
+    // Bullet bullet = new Bullet(300,300, Dir.DOWN);
+    // 将单个子弹改为数组
+    List<Bullet> bullets = new ArrayList<>();
 
     // 构造方法中初始化一些属性
     public TankFrame(){
@@ -66,13 +70,25 @@ public class TankFrame extends Frame {
      */
     @Override
     public void paint(Graphics g){
+        // 观察子弹数量的测试代码
+        Color c = g.getColor();
+        g.setColor(Color.WHITE);
+        g.drawString("子弹的数量" + bullets.size(),10, 60);
+        g.setColor(c);
 
         // 将画笔直接传给目标坦克，让这个坦克自己画出自己
         // （这样就不用去拉取属性，因为拆开封装好的属性是错误的）
         myTank.paint(g);
 
         // 同理，画出子弹
-        bullet.paint(g);
+        // bullet.paint(g); // 这里是画单个子弹
+
+        // 这里，有多少颗子弹，就画多少遍
+        // 注意不要使用 foreach 循环来画，会产生 concurrentModificationException 错误
+        for (int i = 0; i < bullets.size(); i++) {
+            bullets.get(i).paint(g);
+        }
+
 
         // 这样不断隐藏frame，点出frame，就会发现方块移动了
         // x += 10;

@@ -4,28 +4,43 @@ import java.awt.*;
 
 // 定义子弹类
 public class Bullet {
-    // 默认速度
-    private static final int SPEED = 2;
-    // 子弹的高度、宽度
-    private static final int WIDTH = 20, HEIGHT = 20;
+
     // 初始位置
     private int x,y;
     // 子弹方向
     private Dir dir;
+    // 和 Tank 类一样，去持有 TankFrame 类的引用
+    private TankFrame tf = null;
+
+    // 默认速度
+    private static final int SPEED = 10;
+    // 子弹的高度、宽度
+    private static final int WIDTH = 20, HEIGHT = 20;
+    // 子弹是否存在（解决子弹出游戏窗口时，自动删除）
+    // true=存在状态， false=消亡状态
+    private boolean live = true;
+
 
     public Bullet() {
     }
 
-    public Bullet(int x, int y, Dir dir) {
+    public Bullet(int x, int y, Dir dir, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
+        this.tf = tf;
     }
 
     /**
      * 这个方法让子弹自己画出自己
      */
     public void paint(Graphics g){
+
+        // 当子弹处于消亡状态时，将其从子弹List中移除
+        if(!live){
+            tf.bullets.remove(this);
+        }
+
         Color c = g.getColor();
         g.setColor(Color.RED);
         // 这里画出一个圆
@@ -51,6 +66,11 @@ public class Bullet {
             case DOWN:
                 y += SPEED;
                 break;
+        }
+
+        // 子弹出窗口后，将其设置为消亡状态
+        if(x<0 || y<0 || x>TankFrame.GAME_WIDTH || y>TankFrame.GAME_HEIGHT){
+            live = false;
         }
     }
 
