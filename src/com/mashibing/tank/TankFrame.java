@@ -39,7 +39,7 @@ public class TankFrame extends Frame {
         g.fillRect(x,y,50,50);
 
         // 这样不断隐藏frame，点出frame，就会发现方块移动了
-        x += 10;
+        // x += 10;
         // y += 10;
     }
 
@@ -49,16 +49,58 @@ public class TankFrame extends Frame {
      */
     class MyKeyListener extends KeyAdapter{
 
+        // 给每个方向默认设置为false
+        boolean bL = false;
+        boolean bU = false;
+        boolean bR = false;
+        boolean bD = false;
+
         // 这个方法是在一个键被按下去的时候调用
         @Override
         public void keyPressed(KeyEvent e) {
-            System.out.println("key pressed");
+            int key = e.getKeyCode();
+
+            // 每次按下方向键时，对应的值设为 true
+            switch (key){
+                case KeyEvent.VK_LEFT:
+                    bL = true;
+                    break;
+                case KeyEvent.VK_UP:
+                    bU = true;
+                    break;
+                case KeyEvent.VK_RIGHT:
+                    bR = true;
+                    break;
+                case KeyEvent.VK_DOWN:
+                    bD = true;
+                    break;
+                default:
+                    break;
+            }
         }
 
         // 这个方法是在一个键弹起的时候调用
         @Override
         public void keyReleased(KeyEvent e) {
-            System.out.println("key released");
+            int key = e.getKeyCode();
+
+            // 同理，弹起时设置回 false
+            switch (key){
+                case KeyEvent.VK_LEFT:
+                    bL = false;
+                    break;
+                case KeyEvent.VK_UP:
+                    bU = false;
+                    break;
+                case KeyEvent.VK_RIGHT:
+                    bR = false;
+                    break;
+                case KeyEvent.VK_DOWN:
+                    bD = false;
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
