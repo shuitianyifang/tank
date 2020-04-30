@@ -46,8 +46,11 @@ public class Tank {
      * 这个方法让坦克自己画自己
      */
     public void paint(Graphics g){
-        // 这里画出一个黑方块
+        Color c = g.getColor();
+        g.setColor(Color.YELLOW);
+        // 这里画出一个方块
         g.fillRect(x,y,50,50);
+        g.setColor(c);
 
         move();
     }

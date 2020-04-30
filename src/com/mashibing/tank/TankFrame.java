@@ -8,6 +8,8 @@ import java.awt.event.WindowEvent;
 
 // 继承Frame类
 public class TankFrame extends Frame {
+    // 游戏窗口的大小
+    static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
 
     // new出我们需要的坦克
     Tank myTank = new Tank(200,200, Dir.DOWN);
@@ -16,7 +18,7 @@ public class TankFrame extends Frame {
 
     // 构造方法中初始化一些属性
     public TankFrame(){
-        setSize(800,600);
+        setSize(GAME_WIDTH,GAME_HEIGHT);
         setResizable(false);
         setTitle("tank war");
         setVisible(true);
@@ -32,6 +34,31 @@ public class TankFrame extends Frame {
             }
         });
     }
+
+    /**
+     * 使用双缓冲解决画面闪烁问题（不用太深究）
+     * update() 方法会在 paint() 之前被调用
+     * 大概原理：在内存中先全部画好，之后再 drawImage() 一下全部画到屏幕上
+     */
+    Image offScreenImage = null;
+    @Override
+    public void update(Graphics g){
+        if(offScreenImage == null){
+            offScreenImage = this.createImage(GAME_WIDTH,GAME_HEIGHT);
+        }
+        Graphics gOffScreen = offScreenImage.getGraphics();
+        Color c = gOffScreen.getColor();
+        gOffScreen.setColor(Color.BLACK);
+
+        // 大小和游戏窗口大小是一致的
+        gOffScreen.fillRect(0,0,GAME_WIDTH,GAME_HEIGHT);
+        gOffScreen.setColor(c);
+
+        paint(gOffScreen);
+
+        g.drawImage(offScreenImage,0,0,null);
+    }
+
 
     /**
      * 重写paint方法,这个方法，在父类Container中

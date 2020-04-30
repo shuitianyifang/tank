@@ -27,12 +27,9 @@ public class Bullet {
      */
     public void paint(Graphics g){
         Color c = g.getColor();
-        // 更改子弹颜色
         g.setColor(Color.RED);
-
         // 这里画出一个圆
         g.fillOval(x,y,WIDTH,HEIGHT);
-
         g.setColor(c);
 
         move();

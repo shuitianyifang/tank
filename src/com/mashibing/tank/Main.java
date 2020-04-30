@@ -13,6 +13,7 @@ public class Main {
             Thread.sleep(50);
 
             // repaint() 方法会自动调用 paint() 方法，完成画图
+            // 会首先调用 update()，再调用 paint()
             tf.repaint();
         }
     }
