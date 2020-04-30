@@ -1,6 +1,8 @@
 package com.mashibing.tank;
 
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -15,6 +17,9 @@ public class TankFrame extends Frame {
         setResizable(false);
         setTitle("tank war");
         setVisible(true);
+
+        // 在这里使用自定义的键盘事件监听
+        this.addKeyListener(new MyKeyListener());
 
         // 事件监听，点击小叉关闭窗口
         addWindowListener(new WindowAdapter() {
@@ -36,6 +41,25 @@ public class TankFrame extends Frame {
         // 这样不断隐藏frame，点出frame，就会发现方块移动了
         x += 10;
         y += 10;
+    }
+
+
+    /**
+     * 定义一个内部类，来处理对键盘事件的监听，继承类 KeyAdapter
+     */
+    class MyKeyListener extends KeyAdapter{
+
+        // 这个方法是在一个键被按下去的时候调用
+        @Override
+        public void keyPressed(KeyEvent e) {
+            System.out.println("key pressed");
+        }
+
+        // 这个方法是在一个键弹起的时候调用
+        @Override
+        public void keyReleased(KeyEvent e) {
+            System.out.println("key released");
+        }
     }
 
 }
