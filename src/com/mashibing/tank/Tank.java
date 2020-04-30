@@ -8,11 +8,14 @@ import java.awt.*;
 public class Tank {
 
     // 初始位置
-    int x = 200, y = 200;
+    private int x = 200, y = 200;
     // 设置默认方向为向下
-    Dir dir = Dir.DOWN;
+    private Dir dir = Dir.DOWN;
     // 设置坦克默认速度
     private static final int SPEED = 10;
+
+    // 设置坦克是否移动, true=移动，false=不动
+    private boolean moving = false;
 
     public Tank() {
     }
@@ -31,12 +34,26 @@ public class Tank {
         this.dir = dir;
     }
 
+
+    public boolean isMoving() {
+        return moving;
+    }
+    public void setMoving(boolean moving) {
+        this.moving = moving;
+    }
+
     /**
      * 这个方法让坦克自己画自己
      */
     public void paint(Graphics g){
         // 这里画出一个黑方块
         g.fillRect(x,y,50,50);
+
+        move();
+    }
+
+    private void move(){
+        if(!moving) return;
 
         // 根据坦克的方向进行坦克的移动
         // 这里定义每次“画图”的长度 （每次为10）

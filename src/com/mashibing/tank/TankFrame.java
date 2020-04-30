@@ -113,10 +113,19 @@ public class TankFrame extends Frame {
 
         // 这个方法用于改变坦克行进的方向
         private void setMainTankDir(){
+
+            // 如果一个键都不按，就不动。否则，就会动
+            if(!bL && !bU && !bR && !bD){
+                myTank.setMoving(false);
+            }else {
+                myTank.setMoving(true);
+            }
+
             if(bL) myTank.setDir(Dir.LEFT);
             if(bU) myTank.setDir(Dir.UP);
             if(bR) myTank.setDir(Dir.RIGHT);
             if(bD) myTank.setDir(Dir.DOWN);
+
         }
 
     }
