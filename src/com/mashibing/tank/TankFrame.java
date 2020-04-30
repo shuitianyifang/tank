@@ -9,13 +9,8 @@ import java.awt.event.WindowEvent;
 // 继承Frame类
 public class TankFrame extends Frame {
 
-    int x = 200, y = 200;
-
-    // 设置默认方向为向下
-    Dir dir = Dir.DOWN;
-
-    // 设置坦克默认速度
-    private static final int SPEED = 10;
+    // new出我们需要的坦克
+    Tank myTank = new Tank(200,200, Dir.DOWN);
 
     // 构造方法中初始化一些属性
     public TankFrame(){
@@ -42,24 +37,10 @@ public class TankFrame extends Frame {
      */
     @Override
     public void paint(Graphics g){
-        g.fillRect(x,y,50,50);
 
-        // 根据坦克的方向进行坦克的移动
-        // 这里定义每次“画图”的长度 （每次为10）
-        switch (dir){
-            case LEFT:
-                x -= SPEED;
-                break;
-            case UP:
-                y -= SPEED;
-                break;
-            case RIGHT:
-                x += SPEED;
-                break;
-            case DOWN:
-                y += SPEED;
-                break;
-        }
+        // 将画笔直接传给目标坦克，让这个坦克自己画出自己
+        // （这样就不用去拉取属性，因为拆开封装好的属性是错误的）
+        myTank.paint(g);
 
         // 这样不断隐藏frame，点出frame，就会发现方块移动了
         // x += 10;
@@ -132,10 +113,10 @@ public class TankFrame extends Frame {
 
         // 这个方法用于改变坦克行进的方向
         private void setMainTankDir(){
-            if(bL) dir = Dir.LEFT;
-            if(bU) dir = Dir.UP;
-            if(bR) dir = Dir.RIGHT;
-            if(bD) dir = Dir.DOWN;
+            if(bL) myTank.setDir(Dir.LEFT);
+            if(bU) myTank.setDir(Dir.UP);
+            if(bR) myTank.setDir(Dir.RIGHT);
+            if(bD) myTank.setDir(Dir.DOWN);
         }
 
     }
