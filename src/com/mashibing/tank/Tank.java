@@ -13,6 +13,8 @@ public class Tank {
     private Dir dir = Dir.DOWN;
     // 设置坦克默认速度
     private static final int SPEED = 5;
+    // new 坦克时，将哪个窗口需要用到坦克，那个窗口传入
+    private TankFrame tf = null;
 
     // 设置坦克是否移动, true=移动，false=不动
     private boolean moving = false;
@@ -20,11 +22,14 @@ public class Tank {
     public Tank() {
     }
 
-    public Tank(int x, int y, Dir dir) {
+    // 构造方法中添加了 TankFrame 类，使得本类持有了这个类的引用，那么就可以往 TankFrame 中添东西
+    public Tank(int x, int y, Dir dir, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
+        this.tf = tf;
     }
+
 
     // Dir 的 get、set 方法用于设置坦克的方向方法 setMainTankDir()
     public Dir getDir() {
@@ -76,4 +81,9 @@ public class Tank {
                 break;
         }
     }
+
+    public void fire() {
+        tf.bullet = new Bullet(this.x, this.y, this.dir);
+    }
+
 }
