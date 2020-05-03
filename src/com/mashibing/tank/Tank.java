@@ -134,7 +134,7 @@ public class Tank {
                 break;
         }
 
-        // 设定敌方坦克打子弹的频率
+        // 设定坦克打子弹的频率（暂时根据移动来打子弹）
         if(random.nextInt(10) > 5){
             this.fire();
         }

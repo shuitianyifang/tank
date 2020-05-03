@@ -5,7 +5,7 @@ public class Main {
     public static void main(String[] args) throws InterruptedException {
         TankFrame tf = new TankFrame();
 
-        // 初始化敌方坦克的数量、位置、方向
+        // 初始化敌方坦克的数量、位置、方向、所属阵营
         for (int i = 0; i < 5; i++) {
             tf.tanks.add(new Tank(50 + i*80, 200, Dir.DOWN, Group.BAD, tf));
         }

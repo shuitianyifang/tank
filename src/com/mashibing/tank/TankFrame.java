@@ -22,6 +22,9 @@ public class TankFrame extends Frame {
     // 将单个子弹改为数组
     List<Bullet> bullets = new ArrayList<>();
 
+    // new出爆炸
+    Explode e = new Explode(100,100, this);
+
     // 构造方法中初始化一些属性
     public TankFrame(){
         setSize(GAME_WIDTH,GAME_HEIGHT);
@@ -103,6 +106,9 @@ public class TankFrame extends Frame {
                 bullets.get(i).collideWith(tanks.get(j));
             }
         }
+
+        // 画出爆炸
+        e.paint(g);
 
         // 这样不断隐藏frame，点出frame，就会发现方块移动了
         // x += 10;
