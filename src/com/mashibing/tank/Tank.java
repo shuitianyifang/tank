@@ -30,6 +30,10 @@ public class Tank {
     // 定义坦克是否存在属性，true=存在，false=挂了
     private boolean living = true;
 
+    // 解决子弹和坦克碰撞时，Rectangle 会一直 new 的情况；我们这里先定义好一个 Rectangle
+    Rectangle rect = new Rectangle();
+
+
     public Tank() {
     }
 
@@ -40,6 +44,13 @@ public class Tank {
         this.dir = dir;
         this.group = group;
         this.tf = tf;
+
+        // 在 Tank 初始化时，同时初始化好 Rectangle。
+        // 然后在move()方法中，随着坦克移动
+        rect.x = this.x;
+        rect.y = this.y;
+        rect.width = WIDTH;
+        rect.height = HEIGHT;
     }
 
     // 这里的get、set方法用于设置坦克的敌、友
@@ -146,6 +157,11 @@ public class Tank {
 
         // 边界检测（让坦克不会越出游戏窗口）
         boundsCheck();
+
+        // 这里这样处理使得，Rectangle这个矩形不断的在跟着 坦克 移动
+        // 且应该放在 边界检测 之后
+        rect.x = this.x;
+        rect.y = this.y;
     }
 
     private void boundsCheck() {

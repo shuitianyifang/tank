@@ -18,11 +18,15 @@ public class Bullet {
     private static final int SPEED = 6;
     // 子弹的高度、宽度
     // 改为获得图片的具体值，用于计算子弹打出位置
-    public static final int WIDTH = ResourceMgr.bulletD.getWidth();
-    public static final int HEIGHT = ResourceMgr.bulletD.getHeight();
+    public static int WIDTH = ResourceMgr.bulletD.getWidth();
+    public static int HEIGHT = ResourceMgr.bulletD.getHeight();
     // 子弹是否存在（解决子弹出游戏窗口时，自动删除）
     // true=存在状态， false=消亡状态
     private boolean living = true;
+
+    // 解决子弹和坦克碰撞时，Rectangle 会一直 new 的情况；我们这里先定义好一个 Rectangle
+    Rectangle rect = new Rectangle();
+
 
     // 这里的get、set方法用于设置子弹的敌、友
     public Group getGroup() {
@@ -41,6 +45,13 @@ public class Bullet {
         this.dir = dir;
         this.group = group;
         this.tf = tf;
+
+        // 在 Bullet 初始化时，同时初始化好 Rectangle。
+        // 然后在move()方法中，随着子弹移动
+        rect.x = this.x;
+        rect.y = this.y;
+        rect.width = WIDTH;
+        rect.height = HEIGHT;
     }
 
     /**
@@ -95,6 +106,10 @@ public class Bullet {
                 y += SPEED;
                 break;
         }
+
+        // 这里这样处理使得，Rectangle这个矩形不断的在跟着 子弹 移动
+        rect.x = this.x;
+        rect.y = this.y;
 
         // 子弹出窗口后，将其设置为消亡状态
         if(x<0 || y<0 || x>TankFrame.GAME_WIDTH || y>TankFrame.GAME_HEIGHT){
