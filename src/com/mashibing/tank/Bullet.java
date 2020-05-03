@@ -15,7 +15,9 @@ public class Bullet {
     // 默认速度
     private static final int SPEED = 10;
     // 子弹的高度、宽度
-    private static final int WIDTH = 20, HEIGHT = 20;
+    // 改为获得图片的具体值
+    public static final int WIDTH = ResourceMgr.bulletD.getWidth();
+    public static final int HEIGHT = ResourceMgr.bulletD.getHeight();
     // 子弹是否存在（解决子弹出游戏窗口时，自动删除）
     // true=存在状态， false=消亡状态
     private boolean live = true;

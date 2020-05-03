@@ -14,6 +14,10 @@ public class Tank {
     // new 坦克时，将哪个窗口需要用到坦克，那个窗口传入
     private TankFrame tf = null;
 
+    // 坦克的高度、宽度改为获得图片具体值
+    public static final int WIDTH = ResourceMgr.tankD.getWidth();
+    public static final int HEIGHT = ResourceMgr.tankD.getHeight();
+
     // 设置坦克默认速度
     private static final int SPEED = 5;
     // 设置坦克是否移动, true=移动，false=不动
@@ -98,8 +102,13 @@ public class Tank {
         }
     }
 
+    // 坦克发射子弹的方法
     public void fire() {
-        tf.bullets.add( new Bullet(this.x, this.y, this.dir, this.tf) );
+        // 计算子弹打出的起始位置，设置为坦克的中心
+        int bX = this.x + Tank.WIDTH/2 - Bullet.WIDTH/2;
+        int bY = this.y + Tank.HEIGHT/2 - Bullet.HEIGHT/2;
+
+        tf.bullets.add( new Bullet(bX, bY, this.dir, this.tf) );
     }
 
 }
