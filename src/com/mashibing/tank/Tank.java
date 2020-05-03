@@ -21,7 +21,7 @@ public class Tank {
     public static int WIDTH = ResourceMgr.tankU.getWidth();
     public static int HEIGHT = ResourceMgr.tankU.getHeight();
 
-    // 随机数
+    // 随机数，用来敌方坦克随机 移动 和 打子弹
     private Random random = new Random();
     // 设置坦克默认速度
     private static final int SPEED = 2;
@@ -134,10 +134,21 @@ public class Tank {
                 break;
         }
 
-        // 设定坦克打子弹的频率（暂时根据移动来打子弹）
-        if(random.nextInt(10) > 5){
+        // 设定敌方坦克打子弹的频率（根据移动来打子弹），这样自己就不会自动打子弹了
+        if(this.group == Group.BAD && random.nextInt(100) > 95){
             this.fire();
         }
+        
+        // 如果是敌方坦克，则设置随机移动以及频率
+        if(this.group == Group.BAD && random.nextInt(100) > 95){
+            randomDir();
+        }
+
+    }
+
+    // 随机移动方法
+    private void randomDir() {
+        this.dir = Dir.values()[random.nextInt(4)];
     }
 
     // 坦克发射子弹的方法

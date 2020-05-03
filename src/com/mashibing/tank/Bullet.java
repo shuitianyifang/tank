@@ -118,6 +118,7 @@ public class Bullet {
             tank.die();
             this.die();
 
+            // 碰撞时增加爆炸效果
             tf.explodes.add(new Explode(x, y, tf));
         }
     }
