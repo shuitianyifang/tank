@@ -125,11 +125,11 @@ public class Bullet {
         }
 
         // 分别得出 子弹和坦克 的矩形 TODO：用一个 Rectangle 来记录子弹的位置
-        Rectangle rect1 = new Rectangle(this.x, this.y, WIDTH, HEIGHT);
-        Rectangle rect2 = new Rectangle(tank.getX(), tank.getY(), Tank.WIDTH, Tank.HEIGHT);
+        // Rectangle rect1 = new Rectangle(this.x, this.y, WIDTH, HEIGHT);
+        // Rectangle rect2 = new Rectangle(tank.getX(), tank.getY(), Tank.WIDTH, Tank.HEIGHT);
 
         // 判断这两个矩形是否相交，相交即为碰撞
-        if(rect1.intersects(rect2)){
+        if(rect.intersects(tank.rect)){
             tank.die();
             this.die();
 
