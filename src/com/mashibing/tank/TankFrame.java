@@ -14,7 +14,9 @@ public class TankFrame extends Frame {
     static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
 
     // new出我们需要的坦克
-    Tank myTank = new Tank(200,200, Dir.DOWN,this);
+    Tank myTank = new Tank(200,400, Dir.DOWN,this);
+    // new出敌方的坦克
+    List<Tank> tanks = new ArrayList<>();
     // new出子弹
     // Bullet bullet = new Bullet(300,300, Dir.DOWN);
     // 将单个子弹改为数组
@@ -87,6 +89,11 @@ public class TankFrame extends Frame {
         // 注意不要使用 foreach 循环来画，会产生 concurrentModificationException 错误
         for (int i = 0; i < bullets.size(); i++) {
             bullets.get(i).paint(g);
+        }
+
+        // 画出敌方的坦克
+        for (int i = 0; i < tanks.size(); i++) {
+            tanks.get(i).paint(g);
         }
 
 

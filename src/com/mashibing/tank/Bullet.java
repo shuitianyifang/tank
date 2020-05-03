@@ -15,7 +15,7 @@ public class Bullet {
     // 默认速度
     private static final int SPEED = 10;
     // 子弹的高度、宽度
-    // 改为获得图片的具体值
+    // 改为获得图片的具体值，用于计算子弹打出位置
     public static final int WIDTH = ResourceMgr.bulletD.getWidth();
     public static final int HEIGHT = ResourceMgr.bulletD.getHeight();
     // 子弹是否存在（解决子弹出游戏窗口时，自动删除）

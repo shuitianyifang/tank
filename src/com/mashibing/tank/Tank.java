@@ -14,7 +14,7 @@ public class Tank {
     // new 坦克时，将哪个窗口需要用到坦克，那个窗口传入
     private TankFrame tf = null;
 
-    // 坦克的高度、宽度改为获得图片具体值
+    // 坦克的高度、宽度改为获得图片具体值，用于计算子弹打出位置
     public static final int WIDTH = ResourceMgr.tankD.getWidth();
     public static final int HEIGHT = ResourceMgr.tankD.getHeight();
 
