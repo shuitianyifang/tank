@@ -60,7 +60,7 @@ public class Audio {
             sourceDataLine.open(audioFormat, 1024*5);
             sourceDataLine.start();
             // System.out.println(audioInputStream.markSupported());
-            // audioInputStream.mark(12358946);
+            audioInputStream.mark(12358946);
             while ((len = audioInputStream.read(b)) > 0) {
                 sourceDataLine.write(b, 0, len);
             }

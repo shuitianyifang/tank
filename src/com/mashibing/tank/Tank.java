@@ -18,8 +18,8 @@ public class Tank {
     private Group group = Group.BAD;
 
     // 坦克的高度、宽度改为获得图片具体值，用于计算子弹打出位置
-    public static int WIDTH = ResourceMgr.tankU.getWidth();
-    public static int HEIGHT = ResourceMgr.tankU.getHeight();
+    public static int WIDTH = ResourceMgr.goodTankU.getWidth();
+    public static int HEIGHT = ResourceMgr.goodTankU.getHeight();
 
     // 随机数，用来敌方坦克随机 移动 和 打子弹
     private Random random = new Random();
@@ -97,16 +97,16 @@ public class Tank {
         // 这里在画出坦克时，使用已经加载到内存中的坦克图片
         switch (dir){
             case LEFT:
-                g.drawImage(ResourceMgr.tankL, x, y,null);
+                g.drawImage(this.group == Group.GOOD ? ResourceMgr.goodTankL : ResourceMgr.badTankL, x, y,null);
                 break;
             case UP:
-                g.drawImage(ResourceMgr.tankU, x, y,null);
+                g.drawImage(this.group == Group.GOOD ? ResourceMgr.goodTankU : ResourceMgr.badTankU, x, y,null);
                 break;
             case RIGHT:
-                g.drawImage(ResourceMgr.tankR, x, y,null);
+                g.drawImage(this.group == Group.GOOD ? ResourceMgr.goodTankR : ResourceMgr.badTankR, x, y,null);
                 break;
             case DOWN:
-                g.drawImage(ResourceMgr.tankD, x, y,null);
+                g.drawImage(this.group == Group.GOOD ? ResourceMgr.goodTankD : ResourceMgr.badTankD, x, y,null);
                 break;
         }
 
