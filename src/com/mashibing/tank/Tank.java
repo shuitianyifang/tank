@@ -22,6 +22,8 @@ public class Tank {
     private static final int SPEED = 5;
     // 设置坦克是否移动, true=移动，false=不动
     private boolean moving = false;
+    // 定义坦克是否存在属性，true=存在，false=挂了
+    private boolean living = true;
 
     public Tank() {
     }
@@ -34,6 +36,19 @@ public class Tank {
         this.tf = tf;
     }
 
+    // x,y 的 get、set方法，用于子弹和敌方坦克碰撞的检测
+    public int getX() {
+        return x;
+    }
+    public void setX(int x) {
+        this.x = x;
+    }
+    public int getY() {
+        return y;
+    }
+    public void setY(int y) {
+        this.y = y;
+    }
 
     // Dir 的 get、set 方法用于设置坦克的方向方法 setMainTankDir()
     public Dir getDir() {
@@ -60,6 +75,11 @@ public class Tank {
         // // 这里画出一个方块
         // g.fillRect(x,y,50,50);
         // g.setColor(c);
+
+        // 如果为 false=挂了，就不画了，将坦克从List中移除掉
+        if(!living){
+            tf.tanks.remove(this);
+        }
 
         // 这里在画出坦克时，使用已经加载到内存中的坦克图片
         switch (dir){
@@ -111,4 +131,8 @@ public class Tank {
         tf.bullets.add( new Bullet(bX, bY, this.dir, this.tf) );
     }
 
+    // 坦克死亡方法（不画了）
+    public void die() {
+        this.living = false;
+    }
 }

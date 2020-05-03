@@ -76,6 +76,7 @@ public class TankFrame extends Frame {
         Color c = g.getColor();
         g.setColor(Color.WHITE);
         g.drawString("子弹的数量" + bullets.size(),10, 60);
+        g.drawString("敌人的数量" + tanks.size(),10, 80);
         g.setColor(c);
 
         // 将画笔直接传给目标坦克，让这个坦克自己画出自己
@@ -96,6 +97,12 @@ public class TankFrame extends Frame {
             tanks.get(i).paint(g);
         }
 
+        // 在这里做子弹与敌方坦克碰撞的检测
+        for (int i = 0; i < bullets.size(); i++) {
+            for (int j = 0; j < tanks.size(); j++) {
+                bullets.get(i).collideWith(tanks.get(j));
+            }
+        }
 
         // 这样不断隐藏frame，点出frame，就会发现方块移动了
         // x += 10;

@@ -20,7 +20,7 @@ public class Bullet {
     public static final int HEIGHT = ResourceMgr.bulletD.getHeight();
     // 子弹是否存在（解决子弹出游戏窗口时，自动删除）
     // true=存在状态， false=消亡状态
-    private boolean live = true;
+    private boolean living = true;
 
 
     public Bullet() {
@@ -39,7 +39,7 @@ public class Bullet {
     public void paint(Graphics g){
 
         // 当子弹处于消亡状态时，将其从子弹List中移除
-        if(!live){
+        if(!living){
             tf.bullets.remove(this);
         }
 
@@ -88,8 +88,25 @@ public class Bullet {
 
         // 子弹出窗口后，将其设置为消亡状态
         if(x<0 || y<0 || x>TankFrame.GAME_WIDTH || y>TankFrame.GAME_HEIGHT){
-            live = false;
+            living = false;
         }
     }
 
+    // 碰撞的逻辑
+    public void collideWith(Tank tank) {
+        // 分别得出 子弹和坦克 的矩形
+        Rectangle rect1 = new Rectangle(this.x, this.y, WIDTH, HEIGHT);
+        Rectangle rect2 = new Rectangle(tank.getX(), tank.getY(), Tank.WIDTH, Tank.HEIGHT);
+
+        // 判断这两个矩形是否相交，相交即为碰撞
+        if(rect1.intersects(rect2)){
+            tank.die();
+            this.die();
+        }
+    }
+
+    // 子弹死亡方法
+    private void die() {
+        this.living = false;
+    }
 }
