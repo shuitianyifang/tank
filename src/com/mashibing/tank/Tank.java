@@ -57,7 +57,7 @@ public class Tank {
         // g.fillRect(x,y,50,50);
         // g.setColor(c);
 
-        // 这里画出坦克时，使用已经加载到内存中的图片
+        // 这里在画出坦克时，使用已经加载到内存中的坦克图片
         switch (dir){
             case LEFT:
                 g.drawImage(ResourceMgr.tankL, x, y,null);
