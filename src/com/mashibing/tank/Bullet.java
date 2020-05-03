@@ -118,8 +118,12 @@ public class Bullet {
             tank.die();
             this.die();
 
-            // 碰撞时增加爆炸效果
-            tf.explodes.add(new Explode(x, y, tf));
+            // 计算爆炸的位置
+            int eX = tank.getX() + Tank.WIDTH/2 - Explode.WIDTH/2;
+            int eY = tank.getY() + Tank.HEIGHT/2 - Explode.HEIGHT/2;
+
+            // 碰撞时增加爆炸效果，设置为坦克的中心
+            tf.explodes.add(new Explode(eX, eY, tf));
         }
     }
 
