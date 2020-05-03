@@ -7,7 +7,7 @@ public class Main {
 
         // 初始化敌方坦克的数量、位置、方向
         for (int i = 0; i < 5; i++) {
-            tf.tanks.add(new Tank(50 + i*80, 200, Dir.DOWN, tf));
+            tf.tanks.add(new Tank(50 + i*80, 200, Dir.DOWN, Group.BAD, tf));
         }
 
         /**

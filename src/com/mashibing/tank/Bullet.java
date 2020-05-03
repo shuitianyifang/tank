@@ -11,6 +11,8 @@ public class Bullet {
     private Dir dir;
     // 和 Tank 类一样，去持有 TankFrame 类的引用
     private TankFrame tf = null;
+    // 设置子弹所属的敌、友
+    private Group group = Group.BAD;
 
     // 默认速度
     private static final int SPEED = 10;
@@ -22,14 +24,22 @@ public class Bullet {
     // true=存在状态， false=消亡状态
     private boolean living = true;
 
+    // 这里的get、set方法用于设置子弹的敌、友
+    public Group getGroup() {
+        return group;
+    }
+    public void setGroup(Group group) {
+        this.group = group;
+    }
 
     public Bullet() {
     }
 
-    public Bullet(int x, int y, Dir dir, TankFrame tf) {
+    public Bullet(int x, int y, Dir dir, Group group, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
+        this.group = group;
         this.tf = tf;
     }
 
@@ -94,7 +104,12 @@ public class Bullet {
 
     // 碰撞的逻辑
     public void collideWith(Tank tank) {
-        // 分别得出 子弹和坦克 的矩形
+        // 如果子弹和坦克所属阵营相同，则不做碰撞检测
+        if(this.group == tank.getGroup()){
+            return;
+        }
+
+        // 分别得出 子弹和坦克 的矩形 TODO：用一个 Rectangle 来记录子弹的位置
         Rectangle rect1 = new Rectangle(this.x, this.y, WIDTH, HEIGHT);
         Rectangle rect2 = new Rectangle(tank.getX(), tank.getY(), Tank.WIDTH, Tank.HEIGHT);
 

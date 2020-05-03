@@ -14,7 +14,7 @@ public class TankFrame extends Frame {
     static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
 
     // new出我们需要的坦克
-    Tank myTank = new Tank(200,400, Dir.DOWN,this);
+    Tank myTank = new Tank(200,400, Dir.DOWN, Group.GOOD,this);
     // new出敌方的坦克
     List<Tank> tanks = new ArrayList<>();
     // new出子弹
