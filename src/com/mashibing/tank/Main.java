@@ -5,8 +5,11 @@ public class Main {
     public static void main(String[] args) throws InterruptedException {
         TankFrame tf = new TankFrame();
 
+        // 从配置文件中取得坦克数量
+        int initTankCount = Integer.parseInt((String) PropertyMgr.get("initTankCount"));
+
         // 初始化敌方坦克的数量、位置、方向、所属阵营
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < initTankCount; i++) {
             tf.tanks.add(new Tank(50 + i*80, 200, Dir.DOWN, Group.BAD, tf));
         }
 
