@@ -51,11 +51,27 @@ public class Tank {
      * 这个方法让坦克自己画自己
      */
     public void paint(Graphics g){
-        Color c = g.getColor();
-        g.setColor(Color.YELLOW);
-        // 这里画出一个方块
-        g.fillRect(x,y,50,50);
-        g.setColor(c);
+        // Color c = g.getColor();
+        // g.setColor(Color.YELLOW);
+        // // 这里画出一个方块
+        // g.fillRect(x,y,50,50);
+        // g.setColor(c);
+
+        // 这里画出坦克时，使用已经加载到内存中的图片
+        switch (dir){
+            case LEFT:
+                g.drawImage(ResourceMgr.tankL, x, y,null);
+                break;
+            case UP:
+                g.drawImage(ResourceMgr.tankU, x, y,null);
+                break;
+            case RIGHT:
+                g.drawImage(ResourceMgr.tankR, x, y,null);
+                break;
+            case DOWN:
+                g.drawImage(ResourceMgr.tankD, x, y,null);
+                break;
+        }
 
         move();
     }
