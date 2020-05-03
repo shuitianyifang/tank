@@ -10,12 +10,15 @@ public class Main {
             tf.tanks.add(new Tank(50 + i*80, 200, Dir.DOWN, Group.BAD, tf));
         }
 
+        // 游戏背景音效
+        // new Thread(()->new Audio("audio/war1.wav").loop()).start();
+
         /**
          * 这个循环语句的作用：每隔 50 毫秒，就调用一个 paint() 方法
          * 完成方块 自动移动 的作用（用于坦克的移动）
          */
         while (true){
-            Thread.sleep(50);
+            Thread.sleep(25);
 
             // repaint() 方法会自动调用 paint() 方法，完成画图
             // 会首先调用 update()，再调用 paint()

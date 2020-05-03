@@ -18,13 +18,13 @@ public class Tank {
     private Group group = Group.BAD;
 
     // 坦克的高度、宽度改为获得图片具体值，用于计算子弹打出位置
-    public static final int WIDTH = ResourceMgr.tankD.getWidth();
-    public static final int HEIGHT = ResourceMgr.tankD.getHeight();
+    public static int WIDTH = ResourceMgr.tankU.getWidth();
+    public static int HEIGHT = ResourceMgr.tankU.getHeight();
 
     // 随机数
     private Random random = new Random();
     // 设置坦克默认速度
-    private static final int SPEED = 1;
+    private static final int SPEED = 2;
     // 设置坦克是否移动, true=移动，false=不动
     private boolean moving = true;
     // 定义坦克是否存在属性，true=存在，false=挂了
@@ -147,6 +147,11 @@ public class Tank {
         int bY = this.y + Tank.HEIGHT/2 - Bullet.HEIGHT/2;
 
         tf.bullets.add( new Bullet(bX, bY, this.dir, this.group, this.tf) );
+
+        // 如果是自己的坦克，打子弹出声音
+        if(this.group == Group.GOOD){
+            new Thread(()->new Audio("audio/tank_fire.wav").play()).start();
+        }
     }
 
     // 坦克死亡方法（不画了）

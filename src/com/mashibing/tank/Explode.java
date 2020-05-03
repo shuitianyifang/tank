@@ -21,6 +21,9 @@ public class Explode {
         this.x = x;
         this.y = y;
         this.tf = tf;
+
+        // 爆炸声音
+        new Thread(()->new Audio("audio/explode.wav").play()).start();
     }
 
 

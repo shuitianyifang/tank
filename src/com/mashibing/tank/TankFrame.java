@@ -11,7 +11,7 @@ import java.util.List;
 // 继承Frame类
 public class TankFrame extends Frame {
     // 游戏窗口的大小
-    static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
+    static final int GAME_WIDTH = 1080, GAME_HEIGHT = 960;
 
     // new出我们需要的坦克
     Tank myTank = new Tank(200,400, Dir.DOWN, Group.GOOD,this);
@@ -151,6 +151,9 @@ public class TankFrame extends Frame {
             }
 
             setMainTankDir();
+
+            // 坦克移动的声音
+            new Thread(()->new Audio("audio/tank_move.wav").play()).start();
         }
 
         // 这个方法是在一个键弹起的时候调用
