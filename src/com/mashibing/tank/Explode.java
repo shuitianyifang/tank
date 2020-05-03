@@ -32,7 +32,9 @@ public class Explode {
         g.drawImage(ResourceMgr.explodes[step++], x, y, null);
 
         if(step >= ResourceMgr.explodes.length){
-            step = 0;
+
+            // 爆炸完成后，当前爆炸位置不再爆炸
+            tf.explodes.remove(this);
         }
     }
 

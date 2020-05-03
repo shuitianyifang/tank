@@ -23,7 +23,9 @@ public class TankFrame extends Frame {
     List<Bullet> bullets = new ArrayList<>();
 
     // new出爆炸
-    Explode e = new Explode(100,100, this);
+    // Explode e = new Explode(100,100, this);
+    // 因为有很多个爆炸，所以更换为List，哪爆画哪
+    List<Explode> explodes = new ArrayList<>();
 
     // 构造方法中初始化一些属性
     public TankFrame(){
@@ -80,6 +82,7 @@ public class TankFrame extends Frame {
         g.setColor(Color.WHITE);
         g.drawString("子弹的数量" + bullets.size(),10, 60);
         g.drawString("敌人的数量" + tanks.size(),10, 80);
+        g.drawString("爆炸的数量" + explodes.size(),10, 100);
         g.setColor(c);
 
         // 将画笔直接传给目标坦克，让这个坦克自己画出自己
@@ -100,6 +103,13 @@ public class TankFrame extends Frame {
             tanks.get(i).paint(g);
         }
 
+
+        // 画出爆炸，注意，先爆炸，再下面碰撞检测
+        // e.paint(g);
+        for (int i = 0; i < explodes.size(); i++) {
+            explodes.get(i).paint(g);
+        }
+
         // 在这里做子弹与敌方坦克碰撞的检测
         for (int i = 0; i < bullets.size(); i++) {
             for (int j = 0; j < tanks.size(); j++) {
@@ -107,8 +117,6 @@ public class TankFrame extends Frame {
             }
         }
 
-        // 画出爆炸
-        e.paint(g);
 
         // 这样不断隐藏frame，点出frame，就会发现方块移动了
         // x += 10;
