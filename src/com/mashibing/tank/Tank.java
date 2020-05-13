@@ -9,13 +9,13 @@ import java.util.Random;
 public class Tank {
 
     // 初始位置
-    private int x,y;
+    int x,y;
     // 设置默认方向为向下
-    private Dir dir = Dir.DOWN;
+    Dir dir = Dir.DOWN;
     // new 坦克时，将哪个窗口需要用到坦克，那个窗口传入
-    private TankFrame tf = null;
+    TankFrame tf = null;
     // 设置坦克所属的敌、友
-    private Group group = Group.BAD;
+    Group group = Group.BAD;
 
     // 坦克的高度、宽度改为获得图片具体值，用于计算子弹打出位置
     public static int WIDTH = ResourceMgr.goodTankU.getWidth();
@@ -33,6 +33,14 @@ public class Tank {
     // 解决子弹和坦克碰撞时，Rectangle 会一直 new 的情况；我们这里先定义好一个 Rectangle
     Rectangle rect = new Rectangle();
 
+    /**
+     * 这里将 DefaultFireStrategy 作为成员变量传入进来，
+     * 因为在 fire(FireStrategy) 时，每次都会 new，
+     * 所以应该把 FireStrategy 做成单例，或者像这样当做成员变量
+     */
+    // FireStrategy fs = new DefaultFireStrategy();
+    // FireStrategy fs = new FourDirFireStrategy();
+    FireStrategy fs;
 
     public Tank() {
     }
@@ -51,6 +59,13 @@ public class Tank {
         rect.y = this.y;
         rect.width = WIDTH;
         rect.height = HEIGHT;
+
+        // 在这里处理己方和敌人的开火方式
+        if(group == Group.GOOD){
+            fs = new FourDirFireStrategy();
+        }else {
+            fs = new DefaultFireStrategy();
+        }
     }
 
     // 这里的get、set方法用于设置坦克的敌、友
@@ -180,16 +195,7 @@ public class Tank {
 
     // 坦克发射子弹的方法
     public void fire() {
-        // 计算子弹打出的起始位置，设置为坦克的中心
-        int bX = this.x + Tank.WIDTH/2 - Bullet.WIDTH/2;
-        int bY = this.y + Tank.HEIGHT/2 - Bullet.HEIGHT/2;
-
-        tf.bullets.add( new Bullet(bX, bY, this.dir, this.group, this.tf) );
-
-        // 如果是自己的坦克，打子弹出声音
-        if(this.group == Group.GOOD){
-            new Thread(()->new Audio("audio/tank_fire.wav").play()).start();
-        }
+        fs.fire(this);
     }
 
     // 坦克死亡方法（不画了）
