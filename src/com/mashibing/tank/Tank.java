@@ -62,7 +62,14 @@ public class Tank {
 
         // 在这里处理己方和敌人的开火方式
         if(group == Group.GOOD){
-            fs = new FourDirFireStrategy();
+            // fs = new FourDirFireStrategy();
+            // 修改为从配置文件中获取，更加的灵活
+            String goodFSName = (String) PropertyMgr.get("goodFS");
+            try {
+                fs = (FireStrategy) Class.forName(goodFSName).getDeclaredConstructor().newInstance();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }else {
             fs = new DefaultFireStrategy();
         }

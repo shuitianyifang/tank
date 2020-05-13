@@ -2,3 +2,12 @@
 
 #初始化坦克的数量
 initTankCount=10
+
+tankSpeed=5
+bulletSpeed=10
+gameWidth=1080
+gameHeight=720
+
+#坦克开火策略
+goodFS=com.mashibing.tank.FourDirFireStrategy
+badFS=com.mashibing.tank.DefaultFireStrategy
